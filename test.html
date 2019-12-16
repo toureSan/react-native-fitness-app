@@ -1,0 +1,566 @@
+<style>
+    .container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        padding: 1rem;
+        background-color: #c5e2ec;
+    }
+
+    .test-title {
+        color: #408080;
+        font-size: 1rem;
+        font-weight: bold;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+
+    .test-box-container {
+        margin-bottom: 1rem;
+    }
+    
+    .test-box-container-sized {
+        background-color: #a2c5ca;
+        width: 10rem;
+        height: 7.5rem;
+    }
+
+    .test-box {
+        display: inline-block;
+        border: 0.1rem dashed #408080;
+        box-sizing: border-box;
+        min-width: 0.6rem;
+        min-height: 0.6rem;
+    }
+
+    .test-item {
+        display: inline-block;
+        background-color: tomato;
+        border: 0.1rem solid firebrick;
+        text-align: center;
+        color: cornsilk;
+        font-size: 80%;
+        padding: 0.1rem;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .test-item-1 {
+        font-size: 80%;
+    }
+
+    .test-item-2 {
+        font-size: 50%;
+    }
+
+    .test-item-3 {
+        font-size: 120%;
+    }
+
+    .padding-top-1 {
+        padding-top: 0.2rem;
+    }
+
+    .padding-right-1 {
+        padding-right: 0.2rem;
+    }
+
+    .padding-bottom-1 {
+        padding-bottom: 0.2rem;
+    }
+
+    .padding-left-1 {
+        padding-left: 0.2rem;
+    }
+
+    .padding-x-1 {
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
+
+    .padding-y-1 {
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+    }
+
+    .padding-1 {
+        padding: 0.2rem;
+    }
+
+    .width-100 {
+        width: 100%;
+    }
+
+    .height-100 {
+        height: 100%;
+    }
+
+    .width-50 {
+        width: 50%;
+    }
+
+    .height-50 {
+        height: 50%;
+    }
+
+    .children-horizontal {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: flex-start;
+    }
+
+    .children-vertical {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: baseline;
+        justify-content: flex-start;
+    }
+
+    .children-end {
+        justify-content: flex-end;
+    }
+
+    .children-center {
+        justify-content: center;
+    }
+
+    .children-space-between {
+        justify-content: space-between;
+    }
+
+    .children-space-around {
+        justify-content: space-around;
+    }
+
+    .children-space-evenly {
+        justify-content: space-evenly;
+    }
+
+    .children-align-start {
+        align-items: flex-start;
+    }
+
+    .children-align-end {
+        align-items: flex-end;
+    }
+
+    .children-align-center {
+        align-items: center;
+    }
+
+    .children-align-stretch {
+        align-items: stretch;
+    }
+
+    .children-horizontal-spacing-1 > *:not(:first-child) {
+        margin-left: 0.1rem;
+    }
+
+    .children-horizontal-spacing-1 > *:not(:last-child) {
+        margin-right: 0.1rem;
+    }
+
+    .children-vertical-spacing-1 > *:not(:first-child) {
+        margin-top: 0.1rem;
+    }
+
+    .children-vertical-spacing-1 > *:not(:last-child) {
+        margin-bottom: 0.1rem;
+    }
+
+    .children-wrap {
+        flex-wrap: wrap;
+    }
+
+    .link {
+        background-color: tomato;
+        border: solid 8px tomato;
+        font-size: 14px;
+        background-size: 14px;
+        background-image: url("https://image.flaticon.com/icons/png/512/87/87386.png");
+        background-repeat: no-repeat;
+        background-position: left;
+        padding-left: calc(14px + 8px); /* 14 doit correspondre au font size, et 8 doit correspondre au padding (bordure) */
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .arrows-container {
+        position: relative;
+        height: 0.8rem;
+        width: 3.6rem;
+        padding: 0 0.2rem;
+    }
+
+    .arrow-container {
+        height: 0.8rem;
+        width: 3.6rem;
+        position: absolute;
+        line-height: 1rem;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .arrow-tail,
+    .arrow-head {
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        transition-property: background-position;
+    }
+
+    .arrow-tail {
+        height: 0.2rem;
+        width: 100%;
+        transition-duration: 0.8s;
+    }
+
+    .arrow-head {
+        position: absolute;
+        height: 0.4rem;
+        width: 0.3rem;
+        transition-duration: 0.05s;
+    }
+
+    .arrow-head-top {
+        top: 0;
+    }
+
+    .arrow-head-bottom {
+        bottom: 0;
+    }
+
+    .arrow-head-forward {
+        right: 0;
+    }
+
+    .arrow-head-backward {
+        left: 0;
+    }
+
+    .arrow-head-forward.arrow-head-top,
+    .arrow-head-backward.arrow-head-bottom {
+        transform: skewX(45deg);
+    }
+
+    .arrow-head-forward.arrow-head-bottom,
+    .arrow-head-backward.arrow-head-top {
+        transform: skewX(-45deg);
+    }
+
+    .arrows-container.forward .arrow-head-backward,
+    .arrows-container.backward .arrow-head-forward {
+        display: none;
+    }
+
+    .arrows-container.forward .arrow-tail,
+    .arrows-container.forward .arrow-head {
+        background: linear-gradient(to right, white 50%, tomato 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+    }
+
+    .arrows-container.backward .arrow-tail,
+    .arrows-container.backward .arrow-head {
+        background: linear-gradient(to left, white 50%, tomato 50%);
+        background-size: 200% 100%;
+        background-position: left bottom;
+    }
+
+    .arrows-container:hover .arrow-head {
+        transition-delay: 0.5s;
+        transition-duration: 0.3s;
+    }
+
+    .arrows-container.forward:hover .arrow-tail,
+    .arrows-container.forward:hover .arrow-head {
+        background-position: left bottom;
+    }
+
+    .arrows-container.backward:hover .arrow-tail,
+    .arrows-container.backward:hover .arrow-head {
+        background-position: right bottom;
+    }
+
+</style>
+<html style='font-size: 40px;'>
+    <body>
+        <div class='container'>
+            <div class='arrows-container forward'>
+                <div class='arrow-container'>
+                    <div class='arrow-head arrow-head-top arrow-head-backward'>
+                    </div>
+                    <div class='arrow-head arrow-head-bottom arrow-head-backward'>
+                    </div>
+                    <div class='arrow-head arrow-head-top arrow-head-forward'>
+                    </div>
+                    <div class='arrow-head arrow-head-bottom arrow-head-forward'>
+                    </div>
+                    <div class='arrow-tail'>
+                    </div>
+                </div>
+            </div>
+            <a class="link" href>Log in with Line</a>
+            <div class="test-title">Paddings</div>
+            <div class='test-box-container'>
+                <span class='test-box padding-top-1'>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container'>
+                <span class='test-box padding-right-1'>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container'>
+                <span class='test-box padding-bottom-1'>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container'>
+                <span class='test-box padding-left-1'>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container'>
+                <span class='test-box padding-x-1'>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container'>
+                <span class='test-box padding-y-1'>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container'>
+                <span class='test-box padding-1'>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class="test-title">Sizes</div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box width-100'/>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box height-100'/>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box width-100 height-100'/>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box width-50'/>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box height-50'/>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box width-50 height-50'/>
+            </div>
+            <div class="test-title">Child horizontal alignments</div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-end width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-center width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-space-between width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-space-around width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-space-evenly width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-align-start width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-align-end width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-align-center width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-align-stretch width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-horizontal children-wrap width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class="test-title">Child vertical alignments</div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-end width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-center width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-space-between width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-space-around width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-space-evenly width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-align-start width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-align-end width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-align-center width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-align-stretch width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container test-box-container-sized'>
+                <span class='test-box children-vertical children-wrap width-100 height-100'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                    <span class='test-item test-item-1'>Abc</span>
+                </span>
+            </div>
+            <div class="test-title">Child spacing</div>
+            <div class='test-box-container'>
+                <span class='test-box children-horizontal children-horizontal-spacing-1'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+            <div class='test-box-container'>
+                <span class='test-box children-vertical children-vertical-spacing-1'>
+                    <span class='test-item test-item-1'>Abc</span>
+                    <span class='test-item test-item-2'>Abc</span>
+                    <span class='test-item test-item-3'>Abc</span>
+                </span>
+            </div>
+        </div>
+    </body>
+</html>
